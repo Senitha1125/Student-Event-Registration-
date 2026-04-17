@@ -25,13 +25,15 @@ public class AuthController {
 
     @PostMapping("/login")
     public Map<String, String> login(@RequestBody Map<String, String> credentials) {
-        User user = userRepository.findByEmail(credentials.get("email"));
 
-        if (user != null && user.getPassword().equals(credentials.get("password"))) {
+        String email = credentials.get("email").trim();
+        String password = credentials.get("password").trim();
 
+        User user = userRepository.findByEmail(email);
+
+        if (user != null && user.getPassword().equals(password)) {
             Map<String, String> response = new HashMap<>();
             response.put("role", user.getRole());
-
             return response;
         }
 
