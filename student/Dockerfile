@@ -6,8 +6,8 @@ COPY . .
 
 RUN chmod +x mvnw
 
-RUN cd student && ../mvnw clean package -DskipTests
+RUN ./mvnw clean package -DskipTests
 
 EXPOSE 8080
 
-CMD ["sh", "-c", "java -jar student/target/*.jar"]
+CMD ["sh", "-c", "java -jar target/*.jar"]
