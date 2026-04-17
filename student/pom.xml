@@ -79,7 +79,7 @@
             <scope>runtime</scope>
         </dependency>
         <!-- Spring Boot Security -->
-       
+
     </dependencies>
 
     <build>
