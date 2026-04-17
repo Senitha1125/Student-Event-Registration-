@@ -4,7 +4,7 @@ import com.eventmanage.student.model.Student;
 import com.eventmanage.student.service.StudentService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.core.Authentication;
+
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -32,10 +32,8 @@ public class StudentController {
     }
 
     // Get the currently logged-in student's profile using the JWT token context
-    @GetMapping("/me")
-    public ResponseEntity<Student> getMyProfile(Authentication authentication) {
-        // authentication.getName() gets the email/username we extracted from the JWT token in the filter
-        String email = authentication.getName();
+    @GetMapping("/email/{email}")
+    public ResponseEntity<Student> getByEmail(@PathVariable String email) {
         return ResponseEntity.ok(studentService.getStudentByEmail(email));
     }
 
