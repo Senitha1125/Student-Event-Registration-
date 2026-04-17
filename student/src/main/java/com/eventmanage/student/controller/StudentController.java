@@ -11,7 +11,8 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/api/students")
-@CrossOrigin(origins = "https://studenteventmgtdepl-e0713cyef-sthuthi2410236-9833s-projects.vercel.app")
+@CrossOrigin(origins = "*")
+//@CrossOrigin(origins = "https://studenteventmgtdepl-e0713cyef-sthuthi2410236-9833s-projects.vercel.app")
 //@CrossOrigin(origins = "http://localhost:5173", allowedHeaders = "*", methods = {RequestMethod.GET, RequestMethod.POST, RequestMethod.PUT, RequestMethod.DELETE, RequestMethod.OPTIONS})
 public class StudentController {
 
