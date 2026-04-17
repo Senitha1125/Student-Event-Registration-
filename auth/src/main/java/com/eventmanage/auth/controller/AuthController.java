@@ -1,3 +1,14 @@
+package com.eventmanage.auth.controller;
+
+import com.eventmanage.auth.model.User;
+import com.eventmanage.auth.repository.UserRepository;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.Map;
+import java.util.HashMap;
+
 @CrossOrigin(origins = "https://studenteventmgtdepl-qqjjq83ub-sthuthi2410236-9833s-projects.vercel.app")
 @RestController
 @RequestMapping("/api/auth")
@@ -6,11 +17,8 @@ public class AuthController {
     @Autowired
     private UserRepository userRepository;
 
-    private BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
-
     @PostMapping("/register")
     public String register(@RequestBody User user) {
-        user.setPassword(passwordEncoder.encode(user.getPassword()));
         userRepository.save(user);
         return "User registered successfully";
     }
@@ -19,7 +27,7 @@ public class AuthController {
     public Map<String, String> login(@RequestBody Map<String, String> credentials) {
         User user = userRepository.findByEmail(credentials.get("email"));
 
-        if (user != null && passwordEncoder.matches(credentials.get("password"), user.getPassword())) {
+        if (user != null && user.getPassword().equals(credentials.get("password"))) {
 
             Map<String, String> response = new HashMap<>();
             response.put("role", user.getRole());
