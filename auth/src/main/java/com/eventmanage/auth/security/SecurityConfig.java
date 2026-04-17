@@ -24,31 +24,32 @@ public class SecurityConfig {
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         http
-                // 1. Enable CORS and link it to the source below
                 .cors(cors -> cors.configurationSource(corsConfigurationSource()))
-                // 2. Disable CSRF (Essential for REST APIs)
                 .csrf(csrf -> csrf.disable())
                 .authorizeHttpRequests(auth -> auth
-                        // 3. Explicitly permit OPTIONS requests (Pre-flight)
                         .requestMatchers(org.springframework.http.HttpMethod.OPTIONS, "/**").permitAll()
-                        .requestMatchers("/api/auth/**").permitAll()
+                        .requestMatchers("/api/events/**").permitAll()
                         .anyRequest().authenticated()
-                )
-                .sessionManagement(s -> s.sessionCreationPolicy(SessionCreationPolicy.STATELESS));
+                );
 
         return http.build();
     }
 
     @Bean
     public CorsConfigurationSource corsConfigurationSource() {
-        CorsConfiguration config = new CorsConfiguration();
-        config.setAllowedOrigins(Arrays.asList("http://localhost:5173")); // Your React URL
-        config.setAllowedMethods(Arrays.asList("GET", "POST", "PUT", "DELETE", "OPTIONS"));
-        config.setAllowedHeaders(Arrays.asList("Authorization", "Content-Type"));
-        config.setAllowCredentials(true);
+        CorsConfiguration configuration = new CorsConfiguration();
+
+        configuration.setAllowedOrigins(Arrays.asList(
+                "http://localhost:5173",
+                "https://studenteventmgtdepl-e0713cyef-sthuthi2410236-9833s-projects.vercel.app"
+        ));
+
+        configuration.setAllowedMethods(Arrays.asList("GET", "POST", "PUT", "DELETE", "OPTIONS"));
+        configuration.setAllowedHeaders(Arrays.asList("*"));
+        configuration.setAllowCredentials(true);
 
         UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
-        source.registerCorsConfiguration("/**", config);
+        source.registerCorsConfiguration("/**", configuration);
+
         return source;
     }
-}
