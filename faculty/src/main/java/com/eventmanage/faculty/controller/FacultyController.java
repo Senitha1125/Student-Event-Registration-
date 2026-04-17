@@ -10,7 +10,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/api/faculty")
-@CrossOrigin(origins = "*")
+@CrossOrigin(origins = "https://studenteventmgtdepl-e0713cyef-sthuthi2410236-9833s-projects.vercel.app")
 public class FacultyController {
 
     @Autowired

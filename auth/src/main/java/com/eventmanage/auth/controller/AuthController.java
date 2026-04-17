@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
-@CrossOrigin(origins = "*")
+@CrossOrigin(origins = "https://studenteventmgtdepl-e0713cyef-sthuthi2410236-9833s-projects.vercel.app")
 //@CrossOrigin(origins = "http://localhost:5173") //
 @RestController
 @RequestMapping("/api/auth")
