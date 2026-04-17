@@ -33,7 +33,7 @@ public class SecurityConfig {
                         .requestMatchers("/api/students/**").permitAll()
                         .anyRequest().authenticated()
                 );
-
+        http.addFilterBefore(jwtAuthFilter, UsernamePasswordAuthenticationFilter.class);
         return http.build();
     }
 

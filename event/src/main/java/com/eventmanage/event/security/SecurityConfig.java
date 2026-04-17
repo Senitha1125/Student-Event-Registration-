@@ -32,7 +32,7 @@ public class SecurityConfig {
                         .requestMatchers("/api/events/**").permitAll()
                         .anyRequest().authenticated()
                 );
-
+        http.addFilterBefore(jwtAuthFilter, UsernamePasswordAuthenticationFilter.class);
         return http.build();
     }
 
